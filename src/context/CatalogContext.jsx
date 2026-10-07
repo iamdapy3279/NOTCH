@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-const LOCAL_STORAGE_KEY = 'mcrc_catalog_data_v6';
+const LOCAL_STORAGE_KEY = 'mcrc_catalog_data_v7';
 
 const cleanProductName = (name) => {
   if (!name) return name;
