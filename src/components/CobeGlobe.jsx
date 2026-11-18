@@ -1,7 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import createGlobe from "cobe";
 
-export default function CobeGlobe() {
+export default function CobeGlobe({
+  baseColor = [1, 1, 1],
+  markerColor = [0.1, 0.5, 1],
+  glowColor = [0.85, 0.92, 0.88],
+  arcColor = [0.1, 0.5, 1],
+  dark = 0,
+}) {
   const canvasRef = useRef(null);
   const wrapperRef = useRef(null);
   const pointerInteracting = useRef(null);
@@ -32,13 +38,13 @@ export default function CobeGlobe() {
       height: size * 2,
       phi: 0,
       theta: 0.25,
-      dark: 0,
+      dark: dark,
       diffuse: 1.2,
       mapSamples: 16000,
       mapBrightness: 6,
-      baseColor: [1, 1, 1], // White sphere
-      markerColor: [0.1, 0.5, 1], // Blue markers
-      glowColor: [0.85, 0.92, 0.88], // Subtle minty glow
+      baseColor: baseColor,
+      markerColor: markerColor,
+      glowColor: glowColor,
       markers: [
         { location: [19.033, 72.8996], size: 0.08 }, // JNPT/Mumbai
         { location: [34.0522, -118.2437], size: 0.05 }, // Los Angeles
@@ -47,12 +53,12 @@ export default function CobeGlobe() {
         { location: [-33.8688, 151.2093], size: 0.05 }, // Sydney
       ],
       arcs: [
-        { from: [19.033, 72.8996], to: [34.0522, -118.2437], color: [0.1, 0.5, 1] },
-        { from: [19.033, 72.8996], to: [51.9225, 4.4791], color: [0.1, 0.5, 1] },
-        { from: [19.033, 72.8996], to: [25.2048, 55.2708], color: [0.1, 0.5, 1] },
-        { from: [19.033, 72.8996], to: [-33.8688, 151.2093], color: [0.1, 0.5, 1] },
+        { from: [19.033, 72.8996], to: [34.0522, -118.2437], color: arcColor },
+        { from: [19.033, 72.8996], to: [51.9225, 4.4791], color: arcColor },
+        { from: [19.033, 72.8996], to: [25.2048, 55.2708], color: arcColor },
+        { from: [19.033, 72.8996], to: [-33.8688, 151.2093], color: arcColor },
       ],
-      arcColor: [0.1, 0.5, 1],
+      arcColor: arcColor,
       arcWidth: 1.5,
     });
 
@@ -60,7 +66,7 @@ export default function CobeGlobe() {
     let raf;
     const animate = () => {
       if (pointerInteracting.current === null) {
-        phi += 0.002; // Slower auto rotate
+        phi += 0.035; // Rapid, energetic spin
       }
       // Mutate via the update() API
       globe.update({ phi: phi + dragOffset.current });
@@ -72,7 +78,7 @@ export default function CobeGlobe() {
       cancelAnimationFrame(raf);
       globe.destroy();
     };
-  }, [size]);
+  }, [size, dark, JSON.stringify(baseColor), JSON.stringify(markerColor), JSON.stringify(glowColor), JSON.stringify(arcColor)]);
 
   return (
     <div ref={wrapperRef} style={{ width: '100%', aspectRatio: '1/1', position: 'relative' }}>

@@ -122,8 +122,7 @@ export default function CatalogPage({ categoryFilter, navigate }) {
 <span className="absolute top-3 left-3 bg-secondary text-on-secondary text-[11px] font-bold px-2 py-0.5 rounded-md tracking-wider uppercase shadow-xs">{prod.modelNumber}</span>
 </div>
 <div className="p-4 sm:p-5 flex flex-col flex-1">
-<h3 className="font-headline-sm text-base sm:text-lg font-bold text-on-surface mb-1.5 leading-snug">{prod.name}</h3>
-<p className="text-on-surface-variant text-xs line-clamp-2 mb-3">{prod.description || 'Premium handcrafted leather good with exquisite detail and durability.'}</p>
+<h3 className="font-headline-sm text-base sm:text-lg font-bold text-on-surface mb-3 leading-snug">{prod.name}</h3>
 <div className="mt-auto pt-3 border-t border-surface-container-high flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
 <button className={`flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-lg text-xs font-bold transition-all w-full sm:w-auto shadow-xs ${selectedProducts.some(p => p.id === prod.id) ? 'bg-[#0a1811] text-[#86ea9a] hover:bg-[#0a1811]/90' : 'bg-primary text-on-primary hover:bg-primary-container'}`} onClick={(e) => { e.stopPropagation(); toggleProductSelection(prod); }}>
   <span className="material-symbols-outlined text-[18px]">{selectedProducts.some(p => p.id === prod.id) ? 'check' : 'add'}</span> {selectedProducts.some(p => p.id === prod.id) ? 'Selected' : 'Enquire'}

@@ -91,11 +91,11 @@ export default function ProductViewerModal() {
       aria-modal="true"
       aria-labelledby="modal-product-title"
     >
-      <div className="bg-surface-container-lowest w-full max-w-5xl rounded-2xl shadow-2xl overflow-hidden relative flex flex-col md:flex-row max-h-[90vh]">
+      <div className="bg-white w-full max-w-5xl rounded-2xl shadow-2xl overflow-hidden relative flex flex-col md:flex-row max-h-[90vh]">
         {/* Close Button */}
         <button
           type="button"
-          className="absolute top-4 right-4 z-10 w-10 h-10 bg-surface-container-lowest/80 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors rounded-full flex items-center justify-center shadow-sm"
+          className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/90 text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors rounded-full flex items-center justify-center shadow-sm border border-outline-variant/20"
           onClick={closeProductModal}
           aria-label="Close Product Viewer"
         >
@@ -104,12 +104,12 @@ export default function ProductViewerModal() {
 
         {/* Gallery Side */}
         <div
-          className="w-full md:w-1/2 bg-surface-container-low flex flex-col relative"
+          className="w-full md:w-1/2 bg-white flex flex-col relative border-b md:border-b-0 md:border-r border-outline-variant/20"
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
         >
-          <div className="relative flex-1 flex items-center justify-center overflow-hidden min-h-[300px]">
+          <div className="relative flex-1 flex items-center justify-center overflow-hidden min-h-[300px] bg-white p-6">
             <img
               src={images[currentIdx]}
               alt={`${product.name} - View ${currentIdx + 1}`}
@@ -120,7 +120,7 @@ export default function ProductViewerModal() {
               <>
                 <button
                   type="button"
-                  className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-surface-container-lowest/90 text-primary hover:bg-surface-container transition-colors rounded-full flex items-center justify-center shadow-md"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 text-primary hover:bg-surface-container-high transition-colors rounded-full flex items-center justify-center shadow-md border border-outline-variant/20"
                   onClick={handlePrev}
                   aria-label="Previous Image"
                 >
@@ -128,7 +128,7 @@ export default function ProductViewerModal() {
                 </button>
                 <button
                   type="button"
-                  className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-surface-container-lowest/90 text-primary hover:bg-surface-container transition-colors rounded-full flex items-center justify-center shadow-md"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 text-primary hover:bg-surface-container-high transition-colors rounded-full flex items-center justify-center shadow-md border border-outline-variant/20"
                   onClick={handleNext}
                   aria-label="Next Image"
                 >
@@ -140,17 +140,17 @@ export default function ProductViewerModal() {
 
           {/* Thumbnail Strip */}
           {images.length > 1 && (
-            <div className="flex items-center gap-2 p-4 bg-surface-container overflow-x-auto">
+            <div className="flex items-center gap-2 p-4 bg-white border-t border-outline-variant/20 overflow-x-auto">
               {images.map((img, index) => (
                 <div
                   key={index}
-                  className={`strip-thumb ${index === currentIdx ? 'active' : ''}`}
+                  className={`w-20 h-16 rounded-xl overflow-hidden border-2 transition-all cursor-pointer flex-shrink-0 bg-white p-1 flex items-center justify-center ${index === currentIdx ? 'border-primary ring-2 ring-primary/20 shadow-xs' : 'border-outline-variant/30 hover:border-outline-variant opacity-70 hover:opacity-100'}`}
                   onClick={() => setCurrentIdx(index)}
                   role="button"
                   tabIndex={0}
                   aria-label={`View image ${index + 1}`}
                 >
-                  <img src={img} alt={`Thumb ${index + 1}`} />
+                  <img src={img} alt={`Thumb ${index + 1}`} className="w-full h-full object-contain" />
                 </div>
               ))}
             </div>
@@ -158,7 +158,7 @@ export default function ProductViewerModal() {
         </div>
 
         {/* Info Side */}
-        <div className="w-full md:w-1/2 p-6 md:p-8 overflow-y-auto flex flex-col">
+        <div className="w-full md:w-1/2 p-6 md:p-8 overflow-y-auto flex flex-col bg-white">
           <div className="text-label-sm font-label-sm font-bold uppercase tracking-widest text-secondary mb-2">
             {product.categoryName || 'Handcrafted Collection'}
           </div>

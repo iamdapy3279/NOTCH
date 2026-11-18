@@ -1,494 +1,119 @@
 {
   "categories": [
     {
-      "id": "small-leather-goods",
-      "name": "Small Leather Articles",
-      "description": "Discover a curated collection of small leather goods that blend premium craftsmanship with artistic expression. From card holders to keychains, luggage tags, eyewear cases, and travel accessories, each piece is crafted from high-quality leather and enhanced with intricate prints, embossing, and handcrafted detailing. Designed for both functionality and visual distinction, these compact essentials offer refined organization, lasting durability, and a unique aesthetic that transforms everyday accessories into wearable works of art.",
-      "mobileDescription": "Premium small leather goods combining craftsmanship, artistic expression, and handcrafted detailing. Designed for refined organization, durability, and everyday use.",
-      "coverImage": "/Assets/Products/Product2.png",
+      "id": "antileak-containers",
+      "name": "Antileak Containers",
+      "description": "Engineered with precision snap-fit lids and advanced grease- and moisture-resistant barrier technology, our Antileak Containers are designed for hot, saucy, and liquid-rich food deliveries. Available in versatile round and rectangular formats, these certified compostable and biodegradable containers ensure zero spillage, superior structural integrity, and exceptional thermal retention for restaurant chains, ghost kitchens, and food service providers.",
+      "mobileDescription": "High-performance leak-resistant compostable containers designed for hot and liquid-rich food deliveries. Available in round and rectangular formats.",
+      "coverImage": "/assets/products/antileak-containers/round/Antileak_Container_Round_Product.png",
       "products": [
         {
-          "id": "small-leather-goods-om-3765",
-          "name": "Handcrafted Leather Good",
-          "modelNumber": "OM-3765",
-          "categoryId": "small-leather-goods",
-          "categoryName": "Small Leather Goods",
-          "thumbnail": "/Assets/Products/Product1.png",
+          "id": "antileak-containers-round",
+          "name": "Round Antileak Container",
+          "modelNumber": "ALC-RND",
+          "categoryId": "antileak-containers",
+          "categoryName": "Antileak Containers",
+          "thumbnail": "/assets/products/antileak-containers/round/Antileak_Container_Round_Product.png",
           "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
+            "/assets/products/antileak-containers/round/Antileak_Container_Round_Product.png",
+            "/assets/products/antileak-containers/round/Antileak_Container_Round_Stack.png",
+            "/assets/products/antileak-containers/round/Antileak_Container_Round_Food.png"
           ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-3765 is built for international commercial durability and distinctive artisanal luxury."
+          "description": "Heavy-duty molded fiber round antileak container featuring an ultra-secure leak-proof perimeter seal. Ideal for soups, curries, stews, bowls, and saucy dishes. Microwave-safe, freezer-safe, and 100% commercially compostable."
         },
         {
-          "id": "small-leather-goods-om-7637",
-          "name": "Handcrafted Leather Good",
-          "modelNumber": "OM-7637",
-          "categoryId": "small-leather-goods",
-          "categoryName": "Small Leather Goods",
-          "thumbnail": "/Assets/Products/Product1.png",
+          "id": "antileak-containers-rectangular",
+          "name": "Rectangular Antileak Container",
+          "modelNumber": "ALC-RECT",
+          "categoryId": "antileak-containers",
+          "categoryName": "Antileak Containers",
+          "thumbnail": "/assets/products/antileak-containers/rectangular/Antileak_Container_Rectangle_Product.png",
           "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
+            "/assets/products/antileak-containers/rectangular/Antileak_Container_Rectangle_Product.png",
+            "/assets/products/antileak-containers/rectangular/Antileak_Container_Rectangle_Stack.png",
+            "/assets/products/antileak-containers/rectangular/Antileak_Container_Rectangle_Food.png"
           ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-7637 is built for international commercial durability and distinctive artisanal luxury."
-        },
-        {
-          "id": "small-leather-goods-om-8104",
-          "name": "Handcrafted Leather Good",
-          "modelNumber": "OM-8104",
-          "categoryId": "small-leather-goods",
-          "categoryName": "Small Leather Goods",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-8104 is built for international commercial durability and distinctive artisanal luxury."
-        },
-        {
-          "id": "small-leather-goods-om-8493",
-          "name": "Handcrafted Leather Good",
-          "modelNumber": "OM-8493",
-          "categoryId": "small-leather-goods",
-          "categoryName": "Small Leather Goods",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-8493 is built for international commercial durability and distinctive artisanal luxury."
-        },
-        {
-          "id": "small-leather-goods-om-9622",
-          "name": "Handcrafted Leather Good",
-          "modelNumber": "OM-9622",
-          "categoryId": "small-leather-goods",
-          "categoryName": "Small Leather Goods",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-9622 is built for international commercial durability and distinctive artisanal luxury."
-        },
-        {
-          "id": "small-leather-goods-om-9874",
-          "name": "Handcrafted Leather Good",
-          "modelNumber": "OM-9874",
-          "categoryId": "small-leather-goods",
-          "categoryName": "Small Leather Goods",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-9874 is built for international commercial durability and distinctive artisanal luxury."
+          "description": "Commercial-grade rectangular antileak meal container engineered with reinforced ribbed sidewalls and tight-fit snap lid closure. Perfect for meal prep, entrees, takeout delivery, and multi-compartment food service. Heat-resistant and eco-certified."
         }
       ]
     },
     {
-      "id": "pouches",
-      "name": "Pouches",
-      "description": "MCRC offers a versatile range of leather pouches developed for beauty, travel, stationery, gifting, and everyday organization segments. Defined by meticulous attention to detail, these products are engineered to accommodate diverse storage needs while maintaining a strong visual identity. With capabilities spanning multiple sizes, constructions, closures, and decorative techniques, the category is designed to support evolving market trends and private label requirements, delivering products that combine practicality, aesthetic differentiation, and consistent manufacturing quality.",
-      "mobileDescription": "Versatile leather pouches designed for beauty, travel, stationery, gifting, and everyday organization. Available in diverse sizes, constructions, and decorative techniques.",
-      "coverImage": "/Assets/Products/Product2.png",
+      "id": "plates",
+      "name": "Plates",
+      "description": "Engineered from 100% natural sugarcane bagasse and bamboo fiber, our eco-friendly plates offer premium rigid strength, oil and water resistance, and zero sogginess. Perfect for high-volume commercial catering, restaurant dining, fast-casual foodservice, and events. Certified 100% compostable, biodegradable, microwave-safe, and PFAS-free.",
+      "mobileDescription": "Rigid compostable sugarcane fiber dinner plates. Cut-resistant, grease-proof, microwave-safe, and 100% biodegradable.",
+      "coverImage": "/assets/products/plates/plates.png",
       "products": [
         {
-          "id": "pouches-om-2016",
-          "name": "Hand-Painted Leather Pouch",
-          "modelNumber": "OM-2016",
-          "categoryId": "pouches",
-          "categoryName": "Pouches",
-          "thumbnail": "/Assets/Products/Product1.png",
+          "id": "plates-round-dinner-plate",
+          "name": "Round Molded Fiber Plates",
+          "modelNumber": "PLT-RND",
+          "categoryId": "plates",
+          "categoryName": "Plates",
+          "thumbnail": "/assets/products/plates/plates.png",
           "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
+            "/assets/products/plates/plates.png"
           ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-2016 is built for international commercial durability and distinctive artisanal luxury."
-        },
-        {
-          "id": "pouches-om-4345",
-          "name": "Hand-Painted Leather Pouch",
-          "modelNumber": "OM-4345",
-          "categoryId": "pouches",
-          "categoryName": "Pouches",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-4345 is built for international commercial durability and distinctive artisanal luxury."
-        },
-        {
-          "id": "pouches-om-6511",
-          "name": "Hand-Painted Leather Pouch",
-          "modelNumber": "OM-6511",
-          "categoryId": "pouches",
-          "categoryName": "Pouches",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-6511 is built for international commercial durability and distinctive artisanal luxury."
-        },
-        {
-          "id": "pouches-om-9399",
-          "name": "Hand-Painted Leather Pouch",
-          "modelNumber": "OM-9399",
-          "categoryId": "pouches",
-          "categoryName": "Pouches",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-9399 is built for international commercial durability and distinctive artisanal luxury."
+          "description": "Heavy-duty circular molded fiber plates engineered with a reinforced rim for superior rigidity and load-bearing capacity. Designed for hot and cold foods, sauces, and heavy entrees without bending or leaking. 100% PFAS-free and commercially compostable."
         }
       ]
     },
     {
-      "id": "leather-bags",
-      "name": "Leather Bags",
-      "description": "Leather bags remain one of the most important categories in the accessories industry, but differentiation increasingly lies in design and execution. MCRC\u2019s bag range is distinguished by its use of embossed leather and hand-painted artwork, creating products with a level of detail and individuality rarely found in mass-market offerings. From everyday totes and handbags to fashion-forward silhouettes, the category demonstrates how traditional leatherworking techniques can be combined with contemporary design to create products that are both commercially relevant and visually distinctive for global brands, retailers, and private label collections.",
-      "mobileDescription": "Leather bags combining traditional craftsmanship with embossed leather and hand-painted artwork. Designed to deliver distinctive, commercially relevant styles for global brands and retailers.",
-      "coverImage": "/Assets/Products/Product2.png",
+      "id": "clampshell",
+      "name": "Clampshell",
+      "description": "Heavy-duty hinged molded fiber clamshell food containers engineered for hot takeout meals, burgers, sandwiches, and entrees. Featuring a secure dual-tab locking mechanism, these breathable yet grease- and moisture-resistant containers prevent food from getting soggy while ensuring safe transport. 100% biodegradable, compostable, microwave-safe, and PFAS-free.",
+      "mobileDescription": "Hinged compostable molded fiber takeout containers with secure locking tabs. Grease-resistant, breathable, and 100% biodegradable.",
+      "coverImage": "/assets/products/clampshell/clampshell.png",
       "products": [
         {
-          "id": "leather-bags-om-1817",
-          "name": "Artisanal Genuine Leather Bag",
-          "modelNumber": "OM-1817",
-          "categoryId": "leather-bags",
-          "categoryName": "Leather Bags",
-          "thumbnail": "/Assets/Products/Product1.png",
+          "id": "clampshell-hinged-container",
+          "name": "Hinged Molded Fiber Clamshell",
+          "modelNumber": "CLM-01",
+          "categoryId": "clampshell",
+          "categoryName": "Clampshell",
+          "thumbnail": "/assets/products/clampshell/clampshell.png",
           "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
+            "/assets/products/clampshell/clampshell.png"
           ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-1817 is built for international commercial durability and distinctive artisanal luxury."
-        },
-        {
-          "id": "leather-bags-om-lb05",
-          "name": "Artisanal Genuine Leather Bag",
-          "modelNumber": "OM-LB05",
-          "categoryId": "leather-bags",
-          "categoryName": "Leather Bags",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-LB05 is built for international commercial durability and distinctive artisanal luxury."
-        },
-        {
-          "id": "leather-bags-om-lb13",
-          "name": "Artisanal Genuine Leather Bag",
-          "modelNumber": "OM-LB13",
-          "categoryId": "leather-bags",
-          "categoryName": "Leather Bags",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-LB13 is built for international commercial durability and distinctive artisanal luxury."
-        },
-        {
-          "id": "leather-bags-om-lb17",
-          "name": "Artisanal Genuine Leather Bag",
-          "modelNumber": "OM-LB17",
-          "categoryId": "leather-bags",
-          "categoryName": "Leather Bags",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-LB17 is built for international commercial durability and distinctive artisanal luxury."
-        }
-      ]
-    },
-    {
-      "id": "coin-bags-decor",
-      "name": "Decor / Coin Banks",
-      "description": "MCRC\u2019s d\u00e9cor and coin bank category represents a highly specialized segment of leather craftsmanship, transforming a material traditionally used for accessories into three-dimensional decorative products. As one of the few manufacturers with the capability to develop structured d\u00e9cor items in leather, MCRC offers a distinctive range that stands apart in the global market. The category extends beyond animal-inspired designs to include flowers, geometric forms, vehicles, character concepts, and custom shapes developed to suit specific themes and retail programs. Combining advanced leather molding and construction techniques, these products offer a unique alternative to conventional d\u00e9cor materials while creating strong differentiation for gifting, lifestyle, and specialty retail segments.",
-      "mobileDescription": "Specialized three-dimensional leather d\u00e9cor and coin banks featuring unique shapes, themes, and handcrafted construction. Designed for gifting, lifestyle, and specialty retail.",
-      "coverImage": "/Assets/Products/Product2.png",
-      "products": [
-        {
-          "id": "coin-bags-decor-om-4001",
-          "name": "Handcrafted Leather Decor & Coin Bank",
-          "modelNumber": "OM-4001",
-          "categoryId": "coin-bags-decor",
-          "categoryName": "Coin Bags & Decor",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-4001 is built for international commercial durability and distinctive artisanal luxury."
-        },
-        {
-          "id": "coin-bags-decor-om-4821",
-          "name": "Handcrafted Leather Decor & Coin Bank",
-          "modelNumber": "OM-4821",
-          "categoryId": "coin-bags-decor",
-          "categoryName": "Coin Bags & Decor",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-4821 is built for international commercial durability and distinctive artisanal luxury."
-        },
-        {
-          "id": "coin-bags-decor-om-5259",
-          "name": "Handcrafted Leather Decor & Coin Bank",
-          "modelNumber": "OM-5259",
-          "categoryId": "coin-bags-decor",
-          "categoryName": "Coin Bags & Decor",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-5259 is built for international commercial durability and distinctive artisanal luxury."
-        },
-        {
-          "id": "coin-bags-decor-om-7566",
-          "name": "Handcrafted Leather Decor & Coin Bank",
-          "modelNumber": "OM-7566",
-          "categoryId": "coin-bags-decor",
-          "categoryName": "Coin Bags & Decor",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-7566 is built for international commercial durability and distinctive artisanal luxury."
-        }
-      ]
-    },
-    {
-      "id": "wallets",
-      "name": "Wallets",
-      "description": "MCRC\u2019s wallet range showcases the fusion of fine leather craftsmanship and distinctive design, developed to meet the evolving demands of global fashion and lifestyle markets. Crafted with attention to structure, utility, and finish, these wallets feature thoughtfully engineered interiors complemented by vibrant prints, embossed artwork, and contemporary design elements. Available across a variety of formats, sizes, and aesthetics, the category reflects MCRC\u2019s expertise in creating leather accessories that combine visual appeal, durability, and commercial relevance for international retail and private label programs.",
-      "mobileDescription": "Fine leather wallets combining thoughtful utility with vibrant prints, embossed artwork, and contemporary design. Crafted for global fashion and lifestyle markets.",
-      "coverImage": "/Assets/Products/Product2.png",
-      "products": [
-        {
-          "id": "wallets-om-1808",
-          "name": "Embossed Leather Wallet",
-          "modelNumber": "OM-1808",
-          "categoryId": "wallets",
-          "categoryName": "Wallets",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-1808 is built for international commercial durability and distinctive artisanal luxury."
-        },
-        {
-          "id": "wallets-om-8906",
-          "name": "Embossed Leather Wallet",
-          "modelNumber": "OM-8906",
-          "categoryId": "wallets",
-          "categoryName": "Wallets",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-8906 is built for international commercial durability and distinctive artisanal luxury."
-        },
-        {
-          "id": "wallets-om-8975",
-          "name": "Embossed Leather Wallet",
-          "modelNumber": "OM-8975",
-          "categoryId": "wallets",
-          "categoryName": "Wallets",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-8975 is built for international commercial durability and distinctive artisanal luxury."
-        },
-        {
-          "id": "wallets-om-9082",
-          "name": "Embossed Leather Wallet",
-          "modelNumber": "OM-9082",
-          "categoryId": "wallets",
-          "categoryName": "Wallets",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-9082 is built for international commercial durability and distinctive artisanal luxury."
-        },
-        {
-          "id": "wallets-om-9105",
-          "name": "Embossed Leather Wallet",
-          "modelNumber": "OM-9105",
-          "categoryId": "wallets",
-          "categoryName": "Wallets",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-9105 is built for international commercial durability and distinctive artisanal luxury."
-        }
-      ]
-    },
-    {
-      "id": "canvas-bags",
-      "name": "Canvas Bags",
-      "description": "MCRC\u2019s canvas bag category combines the strength and versatility of 14-ounce canvas with the distinctive character of the company\u2019s hand-painted and embossed leather components. By integrating these two materials, the range offers a unique balance of durability, lightweight construction, and artistic detailing. The category spans crossbody bags, backpacks, utility bags, and everyday carry styles, providing an alternative to conventional all-canvas products through the addition of signature leather accents that enhance both appearance and product value. Designed for lifestyle, travel, and casual fashion segments, these bags reflect MCRC\u2019s ability to blend material innovation with recognizable design identity.",
-      "mobileDescription": "Durable 14-ounce canvas bags enhanced with distinctive hand-painted and embossed leather components. A balance of lightweight construction, functionality, and artistic detailing.",
-      "coverImage": "/Assets/Products/Product2.png",
-      "products": [
-        {
-          "id": "canvas-bags-om-0050",
-          "name": "Artisan Canvas & Leather Bag",
-          "modelNumber": "OM-0050",
-          "categoryId": "canvas-bags",
-          "categoryName": "Canvas Bags",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-0050 is built for international commercial durability and distinctive artisanal luxury."
-        },
-        {
-          "id": "canvas-bags-om-0059",
-          "name": "Artisan Canvas & Leather Bag",
-          "modelNumber": "OM-0059",
-          "categoryId": "canvas-bags",
-          "categoryName": "Canvas Bags",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-0059 is built for international commercial durability and distinctive artisanal luxury."
-        },
-        {
-          "id": "canvas-bags-om-0067",
-          "name": "Artisan Canvas & Leather Bag",
-          "modelNumber": "OM-0067",
-          "categoryId": "canvas-bags",
-          "categoryName": "Canvas Bags",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-0067 is built for international commercial durability and distinctive artisanal luxury."
-        },
-        {
-          "id": "canvas-bags-om-0105",
-          "name": "Artisan Canvas & Leather Bag",
-          "modelNumber": "OM-0105",
-          "categoryId": "canvas-bags",
-          "categoryName": "Canvas Bags",
-          "thumbnail": "/Assets/Products/Product1.png",
-          "images": [
-            "/Assets/Products/Product1.png",
-            "/Assets/Products/Product2.png",
-            "/Assets/Products/Product3.png"
-          ],
-          "description": "Masterfully handcrafted in Kolkata using traditional Shantiniketan embossing and hand-painting techniques. Model OM-0105 is built for international commercial durability and distinctive artisanal luxury."
+          "description": "Commercial-grade hinged clamshell takeout box crafted from renewable sugarcane bagasse. Features reinforced structural ribs and dual front tab locks for secure closure. Ideal for burgers, lunches, and hot food deliveries."
         }
       ]
     }
   ],
   "company": {
-    "name": "MCRC Exports",
-    "tagline": "Handcrafted Heritage, Global Excellence",
-    "subtagline": "100% Homemade Hand-Painted Leather Products",
-    "hotline": "+91 9830920676",
-    "hotlineTel": "+919830920676",
-    "email": "mcrcpltd@gmail.com",
-    "location": "Kolkata, West Bengal, India",
+    "name": "Notch",
+    "tagline": "Sustainable Molded Fiber Sourcing & Supply",
+    "subtagline": "100% Tree-Free, Certified Compostable Packaging Solutions",
+    "hotline": "+1 (555) 019-2834",
+    "hotlineTel": "+15550192834",
+    "email": "sourcing@yourcompany.com",
+    "location": "Direct Ports: Mundra & JNPT (India)",
     "stats": [
       {
-        "value": 29,
-        "suffix": "+",
-        "label": "YEARS",
-        "sub": "Heritage of Craftsmanship"
+        "value": 100,
+        "suffix": "%",
+        "label": "TREE-FREE",
+        "sub": "Bagasse & Sugarcane Fiber"
       },
       {
-        "value": 70,
-        "suffix": "+",
-        "label": "COUNTRIES",
-        "sub": "Global Distribution Reach"
+        "value": 100,
+        "suffix": "%",
+        "label": "PFAS-FREE",
+        "sub": "Certified Food-Safe Grade"
       },
       {
-        "value": 350,
-        "suffix": "+",
-        "label": "CLIENTS",
-        "sub": "International B2B Brands"
+        "value": 48,
+        "suffix": "h",
+        "label": "QUICK TURNAROUND",
+        "sub": "FOB/CIF Rate Quotes"
       },
       {
-        "value": 930,
-        "suffix": "K+",
-        "label": "DISPATCHED",
-        "sub": "Artisanal Units Exported"
+        "value": 24,
+        "suffix": "h",
+        "label": "EXPRESS SAMPLE",
+        "sub": "International Air Dispatch"
       }
     ]
   },
-  "team": [
-    {
-      "id": "rakesh-chandan",
-      "name": "Rakesh Chandan",
-      "role": "FOUNDER & VISIONARY",
-      "bio": "The driving force behind its journey a globally recognized leather manufacturing company. With a deep understanding of both craftsmanship and trade, he laid the foundation for a business built on quality, discipline, and long-term relationships. His vision continues to guide the company\u2019s growth, ensuring that tradition evolves with changing global demands.",
-      "image": "/assets/branding/logo.png"
-    },
-    {
-      "id": "madhu-chandan",
-      "name": "Madhu Chandan",
-      "role": "CREATIVE DIRECTOR",
-      "bio": "She leads the design and artistic direction of the company, shaping collections that reflect the unique identity of hand-painted leather craftsmanship. Her work ensures that every product is not just functional, but visually distinctive and aligned with evolving market preferences.",
-      "image": "/assets/branding/logo.png"
-    },
-    {
-      "id": "shlok-chandan",
-      "name": "Shlok Chandan",
-      "role": "BUSINESS DEVELOPMENT",
-      "bio": "Working closely across production, quality control, and client coordination, he ensures that every product meets the expected levels of consistency, finish, and reliability. His focus lies in strengthening systems, improving efficiency, and maintaining the balance between handcrafted detail and scalable production.",
-      "image": "/assets/branding/logo.png"
-    }
-  ]
+  "team": []
 }

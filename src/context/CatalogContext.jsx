@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-const LOCAL_STORAGE_KEY = 'mcrc_catalog_data_v7';
+const LOCAL_STORAGE_KEY = 'notch_catalog_data_v4';
 
 const cleanProductName = (name) => {
   if (!name) return name;
@@ -54,10 +54,19 @@ export function CatalogProvider({ children }) {
   useEffect(() => {
     async function loadCatalog() {
       try {
+        // Clean up legacy keys from previous project and older catalog versions
+        try {
+          Object.keys(localStorage).forEach(key => {
+            if (key.startsWith('mcrc_') || (key.startsWith('notch_catalog_data_') && key !== LOCAL_STORAGE_KEY)) {
+              localStorage.removeItem(key);
+            }
+          });
+        } catch (_) {}
+
         const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
         if (saved) {
           const parsed = JSON.parse(saved);
-          if (parsed && parsed.categories && parsed.categories.length > 0) {
+          if (parsed && parsed.categories && parsed.categories.some(c => c.id === 'clampshell')) {
             const sanitized = sanitizeCatalog(parsed);
             setCatalog(sanitized);
             setLoading(false);
