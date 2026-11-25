@@ -128,14 +128,18 @@ export default function HygienePage({ navigate }) {
       {/* ── 1. TRANSPARENT OVERLAY HEADER (ONLY FOR HYGIENE PAGE) ── */}
       <div className="absolute top-0 inset-x-0 z-30 bg-transparent">
         <header className="max-w-[1380px] mx-auto px-6 lg:px-10 pt-6 pb-4 flex items-center justify-between bg-transparent">
-          {/* Brand Logo */}
+          {/* Brand Logo (Hygiene logo only on /hygiene) */}
           <div 
             className="cursor-pointer transition-transform hover:scale-105"
             onClick={() => goHome2()}
           >
             <img 
-              src="/assets/homepage2/notch_logo.png" 
-              alt="NOTCH" 
+              src={
+                typeof window !== 'undefined' && window.location.pathname === '/hygiene'
+                  ? '/assets/hygiene/hygiene_logo.png'
+                  : '/assets/homepage2/notch_logo.png'
+              }
+              alt="NOTCH Hygiene" 
               className="h-10 sm:h-12 lg:h-14 w-auto object-contain"
             />
           </div>
@@ -370,20 +374,28 @@ export default function HygienePage({ navigate }) {
             </div>
           </div>
 
-          {/* Right Column: Portrait Image with Play Button Overlay */}
+          {/* Right Column: Autoplay Portrait Video */}
           <div className="lg:col-span-6">
-            <div className="relative rounded-[28px] overflow-hidden shadow-sm aspect-[414/534] bg-[#E8E0D5] group">
-              <img 
-                src="/assets/hygiene/hero_face_towel.png" 
-                alt="A Cleaner Way to Dry Your Face" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-              />
-              {/* Subtle Play Button Overlay in Center */}
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-14 h-14 rounded-full bg-white/35 backdrop-blur-md border border-white/60 flex items-center justify-center text-white shadow-lg">
-                  <Play size={20} fill="white" className="ml-0.5" />
-                </div>
-              </div>
+            <div className="relative rounded-[28px] overflow-hidden shadow-sm aspect-[414/534] bg-[#E8E0D5]">
+              <video
+                key="cleaner-way-face-v2"
+                src="/assets/hygiene/cleaner_way_face.mp4?v=2"
+                className="w-full h-full object-cover block"
+                autoPlay
+                muted
+                loop
+                playsInline
+                onLoadedMetadata={(e) => {
+                  e.currentTarget.muted = true;
+                  e.currentTarget.volume = 0;
+                }}
+                onCanPlay={(e) => {
+                  e.currentTarget.muted = true;
+                  e.currentTarget.play().catch(() => {});
+                }}
+              >
+                <source src="/assets/hygiene/cleaner_way_face.mp4?v=2" type="video/mp4" />
+              </video>
             </div>
           </div>
         </section>
@@ -516,27 +528,14 @@ export default function HygienePage({ navigate }) {
           </div>
         </section>
 
-        {/* ── SECTION 4: FULL-BLEED ROUNDED VIDEO SHOWCASE CARD (NO TEXT / NO HEADING) ── */}
-        <section className="relative">
-          <div className="relative rounded-[32px] overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.14)] border border-black/5 bg-[#1D201E] aspect-[16/9]">
-            <video
-              src="/assets/hygiene/showcase_video.mp4"
-              className="w-full h-full object-cover block"
-              autoPlay
-              muted
-              loop
-              playsInline
-              onLoadedMetadata={(e) => {
-                e.currentTarget.muted = true;
-                e.currentTarget.volume = 0;
-              }}
-              onCanPlay={(e) => {
-                e.currentTarget.muted = true;
-                e.currentTarget.play().catch(() => {});
-              }}
-            >
-              <source src="/assets/hygiene/showcase_video.mp4" type="video/mp4" />
-            </video>
+        {/* ── SECTION 4B: FULL-CARD GIF SHOWCASE (NO TEXT, SAME CARD DIMENSIONS) ── */}
+        <section className="w-full max-w-[1060px] mx-auto">
+          <div className="rounded-[28px] overflow-hidden shadow-xs bg-[#95A896] h-[300px] sm:h-[380px] lg:h-[430px]">
+            <img
+              src="/assets/hygiene/towel_strength.gif"
+              alt="NOTCH Disposable Towel Tear-Resistant Tensile Strength"
+              className="w-full h-full object-cover object-center block"
+            />
           </div>
         </section>
 
@@ -991,22 +990,55 @@ export default function HygienePage({ navigate }) {
           </div>
         </section>
 
-        {/* ── SECTION 8: B2B WHOLESALE & PRIVATE LABEL INQUIRY FORM (WIDE FULL-BLEED LAYOUT) ── */}
-        <section
-          id="hygiene-inquiry"
-          className="w-[calc(100vw-2.5rem)] sm:w-[calc(100vw-4rem)] lg:w-[calc(100vw-5rem)] max-w-[1440px] relative left-1/2 -translate-x-1/2 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch"
-        >
-          {/* Left Card: Image Card */}
-          <div className="lg:col-span-4 rounded-[28px] overflow-hidden shadow-xs bg-[#E6DED3] flex items-center justify-center">
-            <img
-              src="/assets/hygiene/wholesale_kraft_pouch.jpg"
-              alt="NOTCH Single Use Ultra Clean Disposable Bath Towel Kraft Packaging"
-              className="w-full h-full object-cover block"
-            />
+        {/* ── SECTION 7C: FULL-WIDTH MARQUEE + 2-COLUMN HORIZONTAL SHOWCASE CARDS ── */}
+        <section className="relative space-y-8 sm:space-y-10">
+          {/* Full-Viewport Width Continuous Horizontal Marquee (Above Cards) */}
+          <div className="w-screen relative left-1/2 -translate-x-1/2 overflow-hidden bg-[#EFE9DC] border-y border-[#E2D9C8] py-4 sm:py-5 select-none">
+            <div className="notch-marquee-track items-center">
+              {[0, 1].map((halfIdx) => (
+                <div key={halfIdx} className="flex items-center shrink-0">
+                  {Array.from({ length: 5 }).map((_, repeatIdx) => (
+                    <div key={repeatIdx} className="flex items-center shrink-0">
+                      {['MADE IN INDIA', 'WOMEN EMPOWERMENT', 'HAND PACKAGED'].map((phrase, pIdx) => (
+                        <React.Fragment key={pIdx}>
+                          <span className="text-sm sm:text-base lg:text-lg font-semibold tracking-[0.2em] uppercase text-[#91593A] font-['Outfit'] px-6 sm:px-9 whitespace-nowrap">
+                            {phrase}
+                          </span>
+                          <span className="text-[#cd9922] text-xs sm:text-sm shrink-0" aria-hidden="true">
+                            ✦
+                          </span>
+                        </React.Fragment>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Right Card: Wide Sage Green Wholesale & OEM Inquiry Card */}
-          <div className="lg:col-span-8 bg-[#95A896] rounded-[28px] p-8 sm:p-10 lg:p-12 xl:p-14 text-white shadow-xs flex flex-col justify-center">
+          {/* 2-Column Side-by-Side Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            <div className="rounded-[28px] overflow-hidden shadow-xs border border-[#E5DFD5] bg-[#E6DED3] h-[360px] sm:h-[440px] lg:h-[500px]">
+              <img
+                src="/assets/hygiene/wholesale_kraft_pouch.jpg"
+                alt="NOTCH Single Use Ultra Clean Disposable Bath Towel Kraft Packaging"
+                className="w-full h-full object-cover object-center block"
+              />
+            </div>
+
+            <div className="rounded-[28px] overflow-hidden shadow-xs border border-[#E5DFD5] bg-[#E6DED3] h-[360px] sm:h-[440px] lg:h-[500px]">
+              <img
+                src="/assets/hygiene/women_packaging_team.jpg?v=2"
+                alt="NOTCH Hygiene — Made in India, Women Empowerment, Hand Packaged"
+                className="w-full h-full object-cover object-top block"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* ── SECTION 8: B2B WHOLESALE & PRIVATE LABEL INQUIRY FORM (CENTERED CARD) ── */}
+        <section id="hygiene-inquiry" className="w-full max-w-[1060px] mx-auto">
+          <div className="bg-[#95A896] rounded-[28px] p-8 sm:p-10 lg:p-12 xl:p-14 text-white shadow-xs">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
             {/* Left Column: B2B Partnership Pitch */}

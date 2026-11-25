@@ -13,3 +13,19 @@
   vertical-align: middle;
   line-height: 1;
 }
+
+@keyframes notch-marquee-scroll {
+  0% {
+    transform: translate3d(0%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.notch-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: notch-marquee-scroll 28s linear infinite;
+  will-change: transform;
+}

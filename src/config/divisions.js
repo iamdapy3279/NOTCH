@@ -131,10 +131,13 @@ export const DIVISIONS = {
       { url: '/assets/hygiene/env_salon.jpg', weight: 10 },
       { url: '/assets/hygiene/env_fitness.jpg', weight: 10 },
       { url: '/assets/hygiene/wholesale_kraft_pouch.jpg', weight: 10 },
+      { url: '/assets/hygiene/women_packaging_team.jpg?v=2', weight: 12 },
+      { url: '/assets/hygiene/towel_strength.gif', weight: 18 },
     ],
-    // Hero video preloaded with streaming buffer progress & muted autoplay safety
+    // Hero & section videos preloaded with streaming buffer progress & muted autoplay safety
     videos: [
       { url: '/assets/hygiene/hero.mp4?v=2', weight: 52 },
+      { url: '/assets/hygiene/cleaner_way_face.mp4?v=2', weight: 40 },
     ],
     backgroundAssets: [],
   },
