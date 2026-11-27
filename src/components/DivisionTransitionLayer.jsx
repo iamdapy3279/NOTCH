@@ -125,16 +125,47 @@ export default function DivisionTransitionLayer({
         // Mount destination page underneath while overlay stays completely opaque
         onNavigateReady?.(division.route);
 
-        // Wait 2 animation frames so destination DOM & decoded images paint cleanly
+        // Wait until the visible hero <video> (if any) is actively playing or decoded
+        // behind the opaque loader before fading out — guarantees zero flash or delay.
+        const startFadeOut = () => {
+          if (revealTriggeredRef.current === 'fading') return;
+          revealTriggeredRef.current = 'fading';
+          setIsFadingOut(true);
+          if (division.backgroundAssets?.length) {
+            warmBackgroundAssets(division.backgroundAssets);
+          }
+          setTimeout(() => {
+            onComplete?.();
+          }, 520);
+        };
+
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
-            setIsFadingOut(true);
-            if (division.backgroundAssets?.length) {
-              warmBackgroundAssets(division.backgroundAssets);
+            const heroVideos = Array.from(
+              document.querySelectorAll('video[data-hero-video="true"]')
+            ).filter((v) => v.offsetParent !== null || getComputedStyle(v).display !== 'none');
+
+            const activeHero = heroVideos[0];
+            if (!activeHero) {
+              startFadeOut();
+              return;
             }
-            setTimeout(() => {
-              onComplete?.();
-            }, 520);
+
+            activeHero.muted = true;
+            activeHero.play().catch(() => {});
+
+            if (!activeHero.paused && activeHero.readyState >= 3) {
+              startFadeOut();
+              return;
+            }
+
+            const safetyTimer = setTimeout(startFadeOut, 450);
+            const onPlaying = () => {
+              clearTimeout(safetyTimer);
+              requestAnimationFrame(startFadeOut);
+            };
+            activeHero.addEventListener('playing', onPlaying, { once: true });
+            activeHero.addEventListener('canplay', onPlaying, { once: true });
           });
         });
         return;

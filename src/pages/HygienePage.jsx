@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import BrochureEmailModal from '../components/BrochureEmailModal';
+import { getPreloadedVideoSrc } from '../utils/assetPreloader';
 import { 
-  Menu, 
+  Home,
   X, 
   ChevronLeft, 
   ChevronRight, 
@@ -17,7 +18,6 @@ import {
 } from 'lucide-react';
 
 export default function HygienePage({ navigate }) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showHeader, setShowHeader] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [brochureToast, setBrochureToast] = useState(false);
@@ -32,13 +32,13 @@ export default function HygienePage({ navigate }) {
   const [inlineFormSubmitted, setInlineFormSubmitted] = useState(false);
 
   const faceTowelSlides = [
-    '/assets/hygiene/disposable_hand_towel.jpg',
-    '/assets/hygiene/disposable_hand_towel_2.jpg'
+    '/assets/hygiene/disposable_hand_towel.jpg?v=3',
+    '/assets/hygiene/disposable_hand_towel_2.jpg?v=3'
   ];
 
   const bathTowelSlides = [
-    '/assets/hygiene/disposable_bath_towel_1.jpg',
-    '/assets/hygiene/disposable_bath_towel_2.jpg'
+    '/assets/hygiene/disposable_bath_towel_1.jpg?v=3',
+    '/assets/hygiene/disposable_bath_towel_2.jpg?v=3'
   ];
 
   useEffect(() => {
@@ -190,48 +190,21 @@ export default function HygienePage({ navigate }) {
               </span>
             </button>
 
-            {/* Mobile menu trigger */}
+            {/* Mobile Home button */}
             <button 
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
-              className="lg:hidden p-2 text-[#28543E] bg-white/40 backdrop-blur-md rounded-full"
-              aria-label="Toggle menu"
+              onClick={() => goHome2()} 
+              className="lg:hidden p-2.5 text-[#28543E] bg-white/40 backdrop-blur-md rounded-full active:scale-95 transition-transform"
+              aria-label="Go to Homepage"
             >
-              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+              <Home size={20} />
             </button>
           </div>
         </header>
-
-        {/* Mobile Dropdown Nav */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden bg-[#EFE9DC]/95 backdrop-blur-xl border-b border-[#DCD3C2] px-6 py-5 space-y-3 flex flex-col">
-            <button onClick={() => { setMobileMenuOpen(false); goHome2(); }} className="text-left text-[#3B473E] py-1">
-              Home
-            </button>
-            <button onClick={() => { setMobileMenuOpen(false); goHome2('who-are-we'); }} className="text-left text-[#3B473E] py-1">
-              About Us
-            </button>
-            <button onClick={() => setMobileMenuOpen(false)} className="text-left font-bold text-[#cd9922] py-1">
-              Hygiene
-            </button>
-            <button onClick={() => { setMobileMenuOpen(false); navigate ? navigate('/products-2') : (window.location.href = '/products-2'); }} className="text-left text-[#3B473E] py-1">
-              Products
-            </button>
-            <button onClick={() => { setMobileMenuOpen(false); document.getElementById('hygiene-inquiry')?.scrollIntoView({ behavior: 'smooth' }); }} className="text-left text-[#3B473E] py-1">
-              Contact Us
-            </button>
-            <button 
-              onClick={() => { setMobileMenuOpen(false); handleBrochureDownload(); }}
-              className="bg-[#cd9922] text-white py-3 rounded-full font-bold flex items-center justify-center gap-2 mt-2"
-            >
-              Download Brochure ▶
-            </button>
-          </div>
-        )}
       </div>
 
-      {/* ── FLOATING PILL NAV (SLIDES DOWN ONLY ON SCROLL UP) ── */}
+      {/* ── FLOATING PILL NAV (SLIDES DOWN ONLY ON SCROLL UP — DESKTOP/TABLET ONLY) ── */}
       <div 
-        className={`fixed top-4 inset-x-0 z-50 flex justify-center pointer-events-none transition-all duration-300 ease-in-out ${
+        className={`hidden md:flex fixed top-4 inset-x-0 z-50 justify-center pointer-events-none transition-all duration-300 ease-in-out ${
           lastScrollY > 120 && showHeader 
             ? 'translate-y-0 opacity-100' 
             : '-translate-y-16 opacity-0'
@@ -271,32 +244,59 @@ export default function HygienePage({ navigate }) {
         </nav>
       </div>
 
-      {/* ── SECTION 0: FULL-VIEWPORT (100vw × 100vh) HERO VIDEO ── */}
-      <section className="relative w-full h-screen min-h-[600px] overflow-hidden bg-[#1D201E] flex items-center justify-center">
-        {/* Autoplay Muted Full-Viewport Video */}
-        <video
-          key="hygiene-hero-video-v2"
-          src="/assets/hygiene/hero.mp4?v=2"
-          className="absolute inset-0 w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          onLoadedMetadata={(e) => {
-            e.currentTarget.muted = true;
-            e.currentTarget.volume = 0;
-          }}
-          onCanPlay={(e) => {
-            e.currentTarget.muted = true;
-            e.currentTarget.play().catch(() => {});
-          }}
-        >
-          <source src="/assets/hygiene/hero.mp4?v=2" type="video/mp4" />
-        </video>
+      {/* ── SECTION 0: FULL-VIEWPORT (100vw × 100vh) HERO VIDEO (DESKTOP + MOBILE) ── */}
+      <section className="relative w-full h-screen min-h-[600px] overflow-hidden bg-[#CBD3D8] flex items-center justify-center">
+        {/* Desktop Autoplay Muted Full-Viewport Video */}
+        {typeof window !== 'undefined' && window.matchMedia && !window.matchMedia('(max-width: 767px)').matches ? (
+          <video
+            key="hygiene-hero-desktop-v5"
+            data-hero-video="true"
+            src={getPreloadedVideoSrc('/assets/hygiene/hero_desktop.mp4?v=5')}
+            poster="/assets/hygiene/hero_desktop_poster.jpg"
+            preload="auto"
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            onLoadedMetadata={(e) => {
+              e.currentTarget.muted = true;
+              e.currentTarget.volume = 0;
+              e.currentTarget.play().catch(() => {});
+            }}
+            onCanPlay={(e) => {
+              e.currentTarget.muted = true;
+              e.currentTarget.play().catch(() => {});
+            }}
+          />
+        ) : (
+          /* Mobile Autoplay Muted Full-Viewport Video */
+          <video
+            key="hygiene-hero-mobile-v5"
+            data-hero-video="true"
+            src={getPreloadedVideoSrc('/assets/hygiene/hero_mobile.mp4?v=5')}
+            poster="/assets/hygiene/hero_mobile_poster.jpg"
+            preload="auto"
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            onLoadedMetadata={(e) => {
+              e.currentTarget.muted = true;
+              e.currentTarget.volume = 0;
+              e.currentTarget.play().catch(() => {});
+            }}
+            onCanPlay={(e) => {
+              e.currentTarget.muted = true;
+              e.currentTarget.play().catch(() => {});
+            }}
+          />
+        )}
 
         {/* Bottom-Anchored Text Overlay & Explore CTA */}
         <div className="absolute bottom-14 sm:bottom-20 inset-x-0 z-20 flex flex-col items-center text-center px-6">
-          <h2 className="max-w-3xl text-2xl sm:text-3xl md:text-4xl font-normal text-[#1D2820] font-['Outfit'] leading-snug tracking-tight drop-shadow-[0_1px_4px_rgba(255,255,255,0.85)]">
+          <h2 className="max-w-xl md:max-w-none md:whitespace-nowrap text-2xl sm:text-3xl lg:text-[34px] font-medium text-[#3A1C0F] font-['Cormorant_Garamond',Georgia,serif] leading-snug tracking-[0.01em]">
             Ultra-Soft, Thick, Absorbent, Single-Use Virgin Towels
           </h2>
           <button
@@ -311,7 +311,7 @@ export default function HygienePage({ navigate }) {
       </section>
 
       {/* ── MAIN HYGIENE PAGE CONTENT (1:1 CLONE OF REFERENCE) ── */}
-      <main className="relative z-10 max-w-[1140px] mx-auto px-6 sm:px-10 pt-20 sm:pt-28 pb-20 space-y-24 sm:space-y-32">
+      <main className="relative z-10 max-w-[1140px] mx-auto px-6 sm:px-10 pt-12 sm:pt-16 pb-20 space-y-12 sm:space-y-16">
 
         {/* ── SECTION 1: A CLEANER WAY TO DRY YOUR FACE ── */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
@@ -378,8 +378,9 @@ export default function HygienePage({ navigate }) {
           <div className="lg:col-span-6">
             <div className="relative rounded-[28px] overflow-hidden shadow-sm aspect-[414/534] bg-[#E8E0D5]">
               <video
-                key="cleaner-way-face-v2"
-                src="/assets/hygiene/cleaner_way_face.mp4?v=2"
+                key="cleaner-way-face-v5"
+                src={getPreloadedVideoSrc('/assets/hygiene/cleaner_way_face.mp4?v=5')}
+                preload="auto"
                 className="w-full h-full object-cover block"
                 autoPlay
                 muted
@@ -388,14 +389,13 @@ export default function HygienePage({ navigate }) {
                 onLoadedMetadata={(e) => {
                   e.currentTarget.muted = true;
                   e.currentTarget.volume = 0;
+                  e.currentTarget.play().catch(() => {});
                 }}
                 onCanPlay={(e) => {
                   e.currentTarget.muted = true;
                   e.currentTarget.play().catch(() => {});
                 }}
-              >
-                <source src="/assets/hygiene/cleaner_way_face.mp4?v=2" type="video/mp4" />
-              </video>
+              />
             </div>
           </div>
         </section>
@@ -421,7 +421,7 @@ export default function HygienePage({ navigate }) {
           {/* Right Column: Product Specifications & Actions */}
           <div className="lg:col-span-6 text-left">
             <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-[#8C7B6E] font-semibold block">
-              SKINCARE &amp; DAILY RITUAL • 30 × 60 CM • 80 GSM
+              SKINCARE &amp; DAILY RITUAL • 30 × 60 CM • 60 GSM
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-normal text-[#91593A] font-['Outfit'] mt-1 pb-4 border-b border-[#E6DFD5]">
               Disposable Hand Towel
@@ -438,7 +438,7 @@ export default function HygienePage({ navigate }) {
                 <strong className="font-semibold text-[#1E2420]">Dual-Texture Performance:</strong> Features a pearl-embossed side for gentle cleansing and a smooth side for sensitive pat-drying.
               </p>
               <p>
-                <strong className="font-semibold text-[#1E2420]">Superior 80 GSM Wet &amp; Dry Strength:</strong> Heavyweight 80 GSM hydro-entangled weave absorbs up to 9× its weight in moisture without tearing or leaving residue.
+                <strong className="font-semibold text-[#1E2420]">Superior 60 GSM Wet &amp; Dry Strength:</strong> Thick 60 GSM hydro-entangled weave absorbs up to 9× its weight in moisture without tearing or leaving residue.
               </p>
               <p>
                 <strong className="font-semibold text-[#1E2420]">Zero Harsh Additives:</strong> Completely free from synthetic fragrances, optical brighteners, chemical binders, and microplastics.
@@ -447,17 +447,10 @@ export default function HygienePage({ navigate }) {
 
             <div className="mt-7 flex flex-wrap items-center gap-4">
               <button 
-                onClick={() => openQuote('Disposable Hand Towel (30 × 60 cm, 80 GSM)')}
+                onClick={() => openQuote('Disposable Hand Towel (30 × 60 cm, 60 GSM)')}
                 className="px-5 py-2.5 rounded-full border border-[#D4CEC3] hover:border-[#91593A] text-[#2B2E2C] text-xs font-semibold inline-flex items-center gap-2 transition-colors"
               >
                 <span>Request Bulk Quote</span>
-                <ArrowRight size={13} />
-              </button>
-              <button 
-                onClick={() => openQuote('Disposable Hand Towel (30 × 60 cm, 80 GSM) — Sample Kit')}
-                className="px-4 py-2.5 rounded-full text-[#2B2E2C] hover:text-[#91593A] text-xs font-semibold inline-flex items-center gap-1.5 transition-colors"
-              >
-                <span>Order Sample Kit</span>
                 <ArrowRight size={13} />
               </button>
             </div>
@@ -469,7 +462,7 @@ export default function HygienePage({ navigate }) {
           {/* Left Column: Product Specifications & Actions */}
           <div className="lg:col-span-6 text-left">
             <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-[#8C7B6E] font-semibold block">
-              FULL-BODY HOSPITALITY &amp; WELLNESS • 70 × 140 CM • 80 GSM
+              FULL-BODY HOSPITALITY &amp; WELLNESS • 70 × 140 CM • 60 GSM
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-normal text-[#91593A] font-['Outfit'] mt-1 pb-4 border-b border-[#E6DFD5]">
               Disposable Bath Towels
@@ -480,7 +473,7 @@ export default function HygienePage({ navigate }) {
                 <strong className="font-semibold text-[#1E2420]">Generous Full-Body Coverage:</strong> Sized at 70 × 140 cm to deliver a plush, enveloping post-shower experience for guests and members.
               </p>
               <p>
-                <strong className="font-semibold text-[#1E2420]">Heavyweight 80 GSM Weave:</strong> Thick 80 GSM waffle and pearl-weave plant fiber construction mimics luxury cotton softness with rapid moisture wicking.
+                <strong className="font-semibold text-[#1E2420]">Plush 60 GSM Weave:</strong> Thick 60 GSM waffle and pearl-weave plant fiber construction mimics luxury cotton softness with rapid moisture wicking.
               </p>
               <p>
                 <strong className="font-semibold text-[#1E2420]">Zero Laundry &amp; Water Overhead:</strong> Eliminates commercial laundering costs, chemical detergents, and energy consumption for hotels, spas, and gyms.
@@ -495,17 +488,10 @@ export default function HygienePage({ navigate }) {
 
             <div className="mt-7 flex flex-wrap items-center gap-4">
               <button 
-                onClick={() => openQuote('Disposable Bath Towels (70 × 140 cm, 80 GSM)')}
+                onClick={() => openQuote('Disposable Bath Towels (70 × 140 cm, 60 GSM)')}
                 className="px-5 py-2.5 rounded-full border border-[#D4CEC3] hover:border-[#91593A] text-[#2B2E2C] text-xs font-semibold inline-flex items-center gap-2 transition-colors"
               >
                 <span>Request Bulk Quote</span>
-                <ArrowRight size={13} />
-              </button>
-              <button 
-                onClick={handleBrochureDownload}
-                className="px-4 py-2.5 rounded-full text-[#2B2E2C] hover:text-[#91593A] text-xs font-semibold inline-flex items-center gap-1.5 transition-colors"
-              >
-                <span>Download Spec Sheet</span>
                 <ArrowRight size={13} />
               </button>
             </div>
@@ -528,20 +514,123 @@ export default function HygienePage({ navigate }) {
           </div>
         </section>
 
-        {/* ── SECTION 4B: FULL-CARD GIF SHOWCASE (NO TEXT, SAME CARD DIMENSIONS) ── */}
+        {/* ── SECTION 4B: FULL-CARD GIF SHOWCASE (ZOOMED OUT 16:9, FULL CARD BLEED) ── */}
         <section className="w-full max-w-[1060px] mx-auto">
-          <div className="rounded-[28px] overflow-hidden shadow-xs bg-[#95A896] h-[300px] sm:h-[380px] lg:h-[430px]">
+          <div className="rounded-[28px] overflow-hidden shadow-xs bg-[#e5d4be] aspect-[16/9]">
             <img
               src="/assets/hygiene/towel_strength.gif"
               alt="NOTCH Disposable Towel Tear-Resistant Tensile Strength"
-              className="w-full h-full object-cover object-center block"
+              className="w-full h-full object-cover object-top block"
             />
           </div>
         </section>
 
         {/* ── SECTION 5: 4-COLUMN SAGE GREEN METRICS & CERTIFICATIONS BANNER ── */}
-        <section className="bg-[#95A896] rounded-[28px] p-8 sm:p-12 lg:p-14 text-white shadow-xs">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 lg:divide-x divide-white/25 gap-8 lg:gap-0">
+        <section>
+          {/* MOBILE-ONLY: Horizontal Swipe Cards with Larger Text, Top-Right Icon & Subtle Swipe Hint */}
+          <div className="sm:hidden">
+            {/* Subtle Swipe Hint */}
+            <div className="flex items-center justify-end gap-1.5 mb-2.5 px-1 text-[11px] font-medium tracking-wider uppercase text-[#8C7B6E]">
+              <span>Swipe to explore</span>
+              <ArrowRight size={13} className="animate-pulse text-[#91593A]" />
+            </div>
+
+            {/* 4 Horizontally Stacked Swipeable Cards */}
+            <div className="-mx-6 px-6 flex items-stretch gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-2">
+              {[
+                {
+                  stat: '5★',
+                  label: 'RATED BY CUSTOMERS',
+                  title: 'Pure Care Inside & Out',
+                  bullets: [
+                    '100% plant-derived viscose fibers',
+                    'Zero lint, tearing, or pilling when wet',
+                    'Trusted by estheticians & spas',
+                  ],
+                  desc: 'Consistently rated 5 stars for plush softness and clinical cleanliness.',
+                  Icon: Smile,
+                },
+                {
+                  stat: '-35%',
+                  label: 'FEWER SKIN IRRITATIONS',
+                  title: 'Gentle on Sensitive Skin',
+                  bullets: [
+                    'Eliminates bacterial cross-contamination',
+                    'Supports clearer skin barrier health',
+                    'Hypoallergenic & pH-neutral',
+                  ],
+                  desc: 'Switching from cloth towels significantly reduces pore-clogging bacteria.',
+                  Icon: Sparkles,
+                },
+                {
+                  stat: '100%',
+                  label: 'PLANT-BASED FIBERS',
+                  title: 'Plant-Based Materials',
+                  bullets: [
+                    'Sustainably harvested bamboo & eucalyptus',
+                    'Zero polyester, nylon, or microplastics',
+                    'Unbleached & chlorine-free processing',
+                  ],
+                  desc: 'Pure botanical cellulose engineered for ultra-high absorbency and strength.',
+                  Icon: Droplet,
+                },
+                {
+                  stat: '90 d',
+                  label: 'BIODEGRADATION CYCLE',
+                  title: 'Certified Eco-Safe Composition',
+                  bullets: [
+                    'Fully decomposes within 90 days',
+                    'EN 13432 & OK Compost certified',
+                    'OEKO-TEX® Standard 100 verified',
+                  ],
+                  desc: 'Returns cleanly to nature without polluting waterways or landfills.',
+                  Icon: ShieldCheck,
+                },
+              ].map(({ stat, label, title, bullets, desc, Icon }, i) => (
+                <div
+                  key={i}
+                  className="relative w-[84vw] max-w-[330px] shrink-0 snap-center bg-[#95A896] rounded-[26px] p-6 text-white shadow-xs flex flex-col justify-between text-left"
+                >
+                  {/* Top-Right Larger Icon */}
+                  <div className="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/18 border border-white/30 flex items-center justify-center text-white">
+                    <Icon size={26} strokeWidth={1.75} />
+                  </div>
+
+                  <div>
+                    <div className="pr-14">
+                      <div className="text-4xl font-bold font-['Outfit'] tracking-tight">
+                        {stat}
+                      </div>
+                      <div className="text-[11px] uppercase tracking-[0.18em] text-white/85 font-semibold mt-1">
+                        {label}
+                      </div>
+                    </div>
+
+                    <h3 className="text-lg font-semibold text-white mt-5 leading-snug font-['Outfit']">
+                      {title}
+                    </h3>
+
+                    <ul className="mt-4 space-y-2.5 text-[13.5px] text-white/95 leading-snug">
+                      {bullets.map((b, bIdx) => (
+                        <li key={bIdx} className="flex items-start gap-2">
+                          <span className="font-bold shrink-0">✓</span>
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <p className="mt-5 pt-4 border-t border-white/25 text-xs text-white/85 leading-relaxed">
+                    {desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* TABLET & DESKTOP: Original 4-Column Sage Green Banner (Untouched) */}
+          <div className="hidden sm:block bg-[#95A896] rounded-[28px] p-8 sm:p-12 lg:p-14 text-white shadow-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 lg:divide-x divide-white/25 gap-8 lg:gap-0">
             
             {/* Column 1: 5★ */}
             <div className="lg:px-6 first:lg:pl-2 flex flex-col items-center text-center justify-between">
@@ -663,6 +752,7 @@ export default function HygienePage({ navigate }) {
               </div>
             </div>
 
+            </div>
           </div>
         </section>
 
@@ -700,22 +790,22 @@ export default function HygienePage({ navigate }) {
               {
                 title: 'Luxury Spas & Wellness',
                 tag: 'TREATMENT & FACIAL RITUALS',
-                image: '/assets/hygiene/env_spa.jpg?v=2'
+                image: '/assets/hygiene/env_spa.jpg?v=3'
               },
               {
                 title: 'Boutique Hotels & Resorts',
                 tag: 'FIVE-STAR GUEST AMENITIES',
-                image: '/assets/hygiene/env_hotel.jpg'
+                image: '/assets/hygiene/env_hotel.jpg?v=3'
               },
               {
                 title: 'Salons & Aesthetics Studios',
                 tag: 'CLINICAL SINGLE-USE GRADE',
-                image: '/assets/hygiene/env_salon.jpg'
+                image: '/assets/hygiene/env_salon.jpg?v=3'
               },
               {
                 title: 'Fitness & Recovery Clubs',
                 tag: 'HYGIENIC REFRESH TOWELS',
-                image: '/assets/hygiene/env_fitness.jpg'
+                image: '/assets/hygiene/env_fitness.jpg?v=3'
               }
             ].map((item, idx) => (
               <div key={idx} className="group flex flex-col">
@@ -781,10 +871,10 @@ export default function HygienePage({ navigate }) {
 
               {[
                 ['Material Source', '100% Plant-Based Viscose (Bamboo & Eucalyptus)'],
-                ['Fabric Weight (GSM)', '80 GSM'],
+                ['Fabric Weight (GSM)', '60 GSM'],
                 ['Weave Patterns', 'Pearl Embossed, Waffle Weave & Smooth Plain'],
-                ['Hand Towel Dimensions', '30 × 60 cm (80 GSM)'],
-                ['Bath Towel Dimensions', '70 × 140 cm (80 GSM, Individually Sealed)'],
+                ['Hand Towel Dimensions', '30 × 60 cm (60 GSM)'],
+                ['Bath Towel Dimensions', '70 × 140 cm (60 GSM, Individually Sealed)'],
                 ['Absorption Capacity', 'Up to 9× dry weight in < 2.0 seconds'],
                 ['Sterilization & Purity', 'ECF Purified, Fragrance-Free & Lint-Free'],
                 ['End-of-Life Disposal', '100% Biodegradable in 90 Days (Home & Industrial)']
@@ -814,6 +904,12 @@ export default function HygienePage({ navigate }) {
             <p className="text-xs sm:text-[13px] text-[#556358] max-w-md text-left md:text-right leading-relaxed">
               A side-by-side comparison of hygiene assurance, operational savings, and sustainability impact across gyms, spas, and hotels.
             </p>
+          </div>
+
+          {/* Subtle Mobile Swipe Hint Above Comparison Table */}
+          <div className="md:hidden flex items-center justify-end gap-1.5 mb-2.5 px-1 text-[11px] font-medium tracking-wider uppercase text-[#8C7B6E]">
+            <span>Swipe to explore</span>
+            <ArrowRight size={13} className="animate-pulse text-[#91593A]" />
           </div>
 
           {/* Comparison Table Card */}
@@ -866,7 +962,7 @@ export default function HygienePage({ navigate }) {
                     },
                     {
                       benefit: 'Consistent Hygiene Standards',
-                      detail: 'Uniform 80 GSM softness and clinical cleanliness in every sheet',
+                      detail: 'Uniform 60 GSM softness and clinical cleanliness in every sheet',
                       gym: 3,
                       spa: 3,
                       hotel: 3,
@@ -1107,6 +1203,18 @@ export default function HygienePage({ navigate }) {
                         className="w-full px-4 py-2.5 rounded-lg bg-white text-[#19241C] text-xs sm:text-sm border border-black/10 focus:outline-none focus:ring-2 focus:ring-white"
                       />
                     </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-medium text-white/90 mb-1">
+                      Phone Number *
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      placeholder="+91 98765 43210"
+                      className="w-full px-4 py-2.5 rounded-lg bg-white text-[#19241C] text-xs sm:text-sm border border-black/10 focus:outline-none focus:ring-2 focus:ring-white"
+                    />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1367,7 +1475,7 @@ export default function HygienePage({ navigate }) {
                       <input 
                         type="tel" 
                         required 
-                        placeholder="+1 555 234 5678"
+                        placeholder="+91 98765 43210"
                         className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#D5CCC0] text-sm focus:outline-none focus:border-[#91593A]"
                       />
                     </div>

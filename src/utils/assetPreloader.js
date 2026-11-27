@@ -1,9 +1,18 @@
 import { DIVISIONS } from '../config/divisions';
 
 const preloadedDivisions = new Set();
+const preloadedVideoBlobs = new Map();
 
 export function isDivisionPreloaded(divisionId) {
   return preloadedDivisions.has(divisionId);
+}
+
+/**
+ * Return an in-memory Blob objectURL if the video was preloaded into RAM,
+ * otherwise fall back to the original network URL.
+ */
+export function getPreloadedVideoSrc(url) {
+  return preloadedVideoBlobs.get(url) || url;
 }
 
 /**
@@ -123,124 +132,111 @@ async function preloadDataUrl(url, onFraction, { timeoutMs = 8000, signal } = {}
 }
 
 /**
- * Preload a video element using muted + playsInline + preload="auto",
- * reporting genuine buffered fraction via `progress` / `loadeddata` / `canplaythrough`.
- * Downloads through the native media pipeline once (no duplicate XHR download)
- * and respects browser autoplay policies (never plays unmuted audio).
+ * Preload a video completely into an in-memory Blob URL and warm its hardware
+ * video decoder before resolving. When the destination <video> mounts with
+ * `getPreloadedVideoSrc(url)`, it reads straight from RAM with zero network or
+ * range-request delay and starts playing on frame 1.
  */
-function preloadVideo(url, onFraction, { timeoutMs = 15000, signal } = {}) {
-  return new Promise((resolve) => {
-    if (signal?.aborted) {
-      resolve({ url, ok: false, aborted: true });
-      return;
+async function preloadVideo(url, onFraction, { timeoutMs = 20000, signal } = {}) {
+  if (signal?.aborted) {
+    return { url, ok: false, aborted: true };
+  }
+
+  if (preloadedVideoBlobs.has(url)) {
+    onFraction(1);
+    return { url, ok: true, blobUrl: preloadedVideoBlobs.get(url) };
+  }
+
+  const controller = new AbortController();
+  const onParentAbort = () => controller.abort();
+  signal?.addEventListener('abort', onParentAbort, { once: true });
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+  let highestFraction = 0;
+  const emit = (val) => {
+    const clamped = Math.max(highestFraction, Math.min(1, val));
+    if (clamped > highestFraction) {
+      highestFraction = clamped;
+      onFraction(clamped);
+    }
+  };
+
+  try {
+    const res = await fetch(url, { signal: controller.signal });
+    if (!res.ok) {
+      emit(1);
+      return { url, ok: false };
     }
 
-    const video = document.createElement('video');
-    video.preload = 'auto';
-    video.muted = true;
-    video.playsInline = true;
-    video.setAttribute('muted', '');
-    video.setAttribute('playsinline', '');
-    video.setAttribute('aria-hidden', 'true');
-    video.style.cssText =
-      'position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;left:-9999px;top:-9999px;';
+    const total = Number(res.headers.get('content-length')) || 0;
+    let blob;
 
-    let settled = false;
-    let highestFraction = 0;
-
-    const updateFraction = (val) => {
-      const clamped = Math.max(highestFraction, Math.min(1, val));
-      if (clamped > highestFraction) {
-        highestFraction = clamped;
-        onFraction(clamped);
+    if (res.body && total > 0) {
+      const reader = res.body.getReader();
+      const chunks = [];
+      let received = 0;
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        chunks.push(value);
+        received += value?.byteLength || 0;
+        emit(Math.min(0.88, (received / total) * 0.88));
       }
-    };
+      blob = new Blob(chunks, { type: 'video/mp4' });
+    } else {
+      blob = await res.blob();
+      emit(0.88);
+    }
 
-    const cleanup = () => {
-      clearTimeout(timer);
-      signal?.removeEventListener('abort', onAbort);
-      video.removeEventListener('loadedmetadata', onMetadata);
-      video.removeEventListener('loadeddata', onLoadedData);
-      video.removeEventListener('progress', onProgress);
-      video.removeEventListener('canplay', onCanPlay);
-      video.removeEventListener('canplaythrough', onCanPlayThrough);
-      video.removeEventListener('error', onError);
-      try {
-        video.pause();
-        video.removeAttribute('src');
-        video.load();
-        if (video.parentNode) video.parentNode.removeChild(video);
-      } catch {
-        // Ignore cleanup errors
-      }
-    };
+    const blobUrl = URL.createObjectURL(blob);
+    preloadedVideoBlobs.set(url, blobUrl);
 
-    const finish = (ok) => {
-      if (settled) return;
-      settled = true;
-      updateFraction(1);
-      cleanup();
-      resolve({ url, ok });
-    };
+    // Warm the browser's video decoder on the in-memory Blob URL so first frame is decoded
+    await new Promise((resolve) => {
+      const video = document.createElement('video');
+      video.preload = 'auto';
+      video.muted = true;
+      video.playsInline = true;
+      video.setAttribute('muted', '');
+      video.setAttribute('playsinline', '');
+      video.style.cssText =
+        'position:fixed;width:2px;height:2px;opacity:0;pointer-events:none;left:0;top:0;z-index:-1;';
 
-    const onAbort = () => finish(false);
+      let done = false;
+      const finishDecode = () => {
+        if (done) return;
+        done = true;
+        clearTimeout(decodeTimer);
+        try {
+          video.pause();
+          if (video.parentNode) video.parentNode.removeChild(video);
+        } catch {
+          // ignore
+        }
+        resolve();
+      };
 
-    const readBufferedRatio = () => {
-      if (!video.duration || !Number.isFinite(video.duration) || video.duration <= 0) {
-        return highestFraction;
-      }
-      if (video.buffered && video.buffered.length > 0) {
-        const end = video.buffered.end(video.buffered.length - 1);
-        return Math.min(0.98, end / video.duration);
-      }
-      return highestFraction;
-    };
+      const decodeTimer = setTimeout(finishDecode, 1500);
+      video.addEventListener('canplaythrough', finishDecode, { once: true });
+      video.addEventListener('loadeddata', () => {
+        video.play().then(finishDecode).catch(finishDecode);
+      }, { once: true });
+      video.addEventListener('error', finishDecode, { once: true });
 
-    const onMetadata = () => {
-      updateFraction(Math.max(0.15, readBufferedRatio()));
-    };
+      document.body.appendChild(video);
+      video.src = blobUrl;
+      video.load();
+    });
 
-    const onLoadedData = () => {
-      updateFraction(Math.max(0.45, readBufferedRatio()));
-    };
-
-    const onProgress = () => {
-      const ratio = readBufferedRatio();
-      updateFraction(ratio);
-      if (ratio >= 0.92 && video.readyState >= 3) {
-        finish(true);
-      }
-    };
-
-    const onCanPlay = () => {
-      updateFraction(Math.max(0.75, readBufferedRatio()));
-    };
-
-    const onCanPlayThrough = () => {
-      finish(true);
-    };
-
-    const onError = () => {
-      finish(false);
-    };
-
-    const timer = setTimeout(() => {
-      // Slow-network graceful cap: reveal page once initial data or timeout completes
-      finish(video.readyState >= 2);
-    }, timeoutMs);
-
-    signal?.addEventListener('abort', onAbort, { once: true });
-    video.addEventListener('loadedmetadata', onMetadata);
-    video.addEventListener('loadeddata', onLoadedData);
-    video.addEventListener('progress', onProgress);
-    video.addEventListener('canplay', onCanPlay);
-    video.addEventListener('canplaythrough', onCanPlayThrough);
-    video.addEventListener('error', onError);
-
-    document.body.appendChild(video);
-    video.src = url;
-    video.load();
-  });
+    emit(1);
+    return { url, ok: true, blobUrl };
+  } catch {
+    emit(1);
+    return { url, ok: false };
+  } finally {
+    clearTimeout(timer);
+    signal?.removeEventListener('abort', onParentAbort);
+  }
 }
 
 /**
@@ -285,6 +281,9 @@ export async function preloadDivisionAssets(divisionId, { onProgress, signal } =
     tasks.push({ key: `img-${i}`, weight: item.weight, label: 'Loading visual assets…', fraction: 0, item });
   });
   (division.videos || []).forEach((item, i) => {
+    if (item.media && typeof window !== 'undefined' && window.matchMedia && !window.matchMedia(item.media).matches) {
+      return;
+    }
     tasks.push({ key: `vid-${i}`, weight: item.weight, label: 'Buffering hero media…', fraction: 0, item });
   });
 
