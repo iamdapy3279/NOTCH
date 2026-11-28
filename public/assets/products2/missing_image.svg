@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <rect width="600" height="600" fill="#EFEAE1"/>
+  <rect x="40" y="40" width="520" height="520" rx="28" fill="#F8F5EF" stroke="#D8CEBE" stroke-width="2" stroke-dasharray="10 8"/>
+  <g transform="translate(244, 210)" fill="none" stroke="#8C7B6E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="8" y="16" width="96" height="80" rx="10"/>
+    <circle cx="38" cy="44" r="9"/>
+    <path d="M104 74 L78 48 L48 78 L34 64 L8 90"/>
+  </g>
+  <text x="300" y="346" text-anchor="middle" font-family="Outfit, system-ui, sans-serif" font-size="22" font-weight="600" fill="#28543E" letter-spacing="0.06em">
+    IMAGE COMING SOON
+  </text>
+  <text x="300" y="378" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="14" font-weight="500" fill="#6E7871">
+    Product photography is being updated
+  </text>
+</svg>
